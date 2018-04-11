@@ -1,0 +1,20 @@
+window_sizes 1575 883 393 1177 731 104
+
+diagrams
+  active  classdiagram_ref 128025 // models
+    941 584 100 A4 0 0
+end
+show_stereotypes
+marked
+  attribute_ref 129817 // usagers
+end
+selected operation_ref 130073 // index
+open
+  class_ref 128025 // MLivre
+  class_ref 128153 // MUsager
+  class_ref 128537 // VLivres
+  class_ref 128665 // VEmprunts
+  attribute_ref 129817 // usagers
+  class_ref 128921 // CLivre
+end
+end

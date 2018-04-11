@@ -1,0 +1,52 @@
+Dictionnaire de données 
+
+Nom : id
+Type : Auto_increment
+Taille : 25,0
+Commentaire : 
+
+Nom : nom
+Type : Varchar
+Taille : 32,0
+Commentaire : 
+
+Nom : prenom
+Type : Varchar
+Taille : 32,0
+Commentaire : 
+
+Nom : prenom_auteur
+Type : Varchar
+Taille : 32,0
+Commentaire : 
+
+Nom : nom_auteur
+Type : Varchar
+Taille : 32,0
+Commentaire : 
+
+Nom : annee
+Type : Int
+Taille : 25,0
+Commentaire : 
+
+Nom : titre
+Type : Varchar
+Taille : 250,0
+Commentaire : 
+
+Nom : editeur
+Type : Varchar
+Taille : 32,0
+Commentaire : 
+
+Nom : date_sortie
+Type : Date
+Taille : 25,0
+Commentaire : 
+
+Nom : date_retour
+Type : Date
+Taille : 25,0
+Commentaire : 
+
