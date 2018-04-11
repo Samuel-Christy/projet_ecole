@@ -4,18 +4,18 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 
-public class VLivre {
+public class VLivres {
 
 	private JFrame frame;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main() {
+	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					VLivre window = new VLivre();
+					VLivres window = new VLivres();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -27,7 +27,7 @@ public class VLivre {
 	/**
 	 * Create the application.
 	 */
-	public VLivre() {
+	public VLivres() {
 		initialize();
 	}
 

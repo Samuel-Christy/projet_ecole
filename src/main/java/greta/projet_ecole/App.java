@@ -1,6 +1,6 @@
 package greta.projet_ecole;
 
-import greta.projet_ecole.views.VLivre;
+import greta.projet_ecole.views.VLivres;
 
 /**
  * Hello world!
@@ -8,6 +8,7 @@ import greta.projet_ecole.views.VLivre;
  */
 public class App {
 	public static void main(String[] args) {
-		VLivre.main();
+		// launch the window :
+		VLivres.main(args);
 	}
 }

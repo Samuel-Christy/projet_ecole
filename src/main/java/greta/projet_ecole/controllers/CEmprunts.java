@@ -6,4 +6,14 @@ public class CEmprunts {
 
 	}
 
+	public void sortieLivre() {
+	}
+
+	public void retourLivre() {
+	}
+
+	public void decaleLivre() {
+
+	}
+
 }
