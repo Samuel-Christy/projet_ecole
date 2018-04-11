@@ -1,0 +1,9 @@
+window_sizes 1575 883 393 1177 733 104
+
+show_stereotypes
+selected classview_ref 128025 // models
+open
+  
+package_ref 128025 // models
+end
+end
