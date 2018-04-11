@@ -3,6 +3,8 @@ package greta.projet_ecole;
 import java.io.File;
 import java.io.IOException;
 
+import greta.projet_ecole.models.MColLivres;
+import greta.projet_ecole.models.MColUsagers;
 import greta.projet_ecole.models.MLivre;
 import greta.projet_ecole.models.MUsager;
 import greta.projet_ecole.pdo.PDOSqlite;
@@ -23,10 +25,19 @@ public class App {
 
 		System.out.println(l);
 
-		// MUsager u = new MUsager("Aissatou", "Brocas");
-		MUsager u = new MUsager();
-		u.load(1);
-		System.out.println(u.getNom());
+		MColUsagers cusagers = new MColUsagers();
+		cusagers.list();
+		for (MUsager u : cusagers.getUsagers()) {
+			System.out.println(u.getNom());
+		}
+
+		MColLivres clivres = new MColLivres();
+		clivres.list();
+
+		for (MLivre u : clivres.getLivres()) {
+			System.out.println(u.getTitre());
+		}
+
 		// launch the window :
 		VLivres.main(args);
 	}

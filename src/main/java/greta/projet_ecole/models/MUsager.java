@@ -68,6 +68,29 @@ public class MUsager {
 
 	}
 
+	// private void fetchAssoc() {
+	//
+	// String query = "SELECT * FROM livres WHERE usager_id=" + id;
+	// ResultSet r = PDOSqlite.executeSQL(query);
+	//
+	// try {
+	// while (r.next()) {
+	// if (nom == null) {
+	// id = r.getInt("id");
+	//
+	// nom = r.getString("nom");
+	// prenom = r.getString("prenom");
+	// }
+	// // TODO : lire dates et Usager
+	//
+	// }
+	// } catch (SQLException e) {
+	// // TODO Auto-generated catch block
+	// e.printStackTrace();
+	// }
+	//
+	// }
+
 	public void dissoc(MLivre livre) {
 
 	}
