@@ -8,7 +8,7 @@ import java.sql.Statement;
 
 public class PDOSqlite {
 
-	private static String URL = "jdbc:sqlite:C:/Program Files (x86)/SQLiteStudio/design_patterns_1";
+	private static String URL = "jdbc:sqlite:database.sqlite";
 
 	private static Connection con;
 	private static Statement stmt;
@@ -22,7 +22,8 @@ public class PDOSqlite {
 				// System.out.println(con);
 				return con;
 			} catch (Exception e) {
-				// TODO: handle exception
+				// NB : comment this when in production, else it'll throw
+				// exceptions on request not returning results (insert, etc...)
 				e.printStackTrace();
 			}
 		}
@@ -59,7 +60,7 @@ public class PDOSqlite {
 
 			} catch (SQLException e) {
 
-				// e.printStackTrace();
+				e.printStackTrace();
 			}
 		}
 		return r;
