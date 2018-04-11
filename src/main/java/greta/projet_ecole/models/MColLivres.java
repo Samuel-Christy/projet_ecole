@@ -28,6 +28,11 @@ public class MColLivres {
 
 	}
 
+	public void refreshList() {
+		livres = new ArrayList<MLivre>();
+		list();
+	}
+
 	public ArrayList<MLivre> getLivres() {
 		return livres;
 	}
