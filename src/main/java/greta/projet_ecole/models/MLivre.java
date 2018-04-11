@@ -36,6 +36,15 @@ public class MLivre {
 
 	}
 
+	public MLivre(int id, String nom_auteur, String prenom_auteur, String titre, int annee, String editeur) {
+		this.id = id;
+		this.nom_auteur = nom_auteur;
+		this.prenom_auteur = prenom_auteur;
+		this.titre = titre;
+		this.editeur = editeur;
+
+	}
+
 	public MLivre() {
 		super();
 	}

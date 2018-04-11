@@ -53,9 +53,10 @@ public class PDOSqlite {
 				// System.out.println(query);
 				if (query.startsWith("SELECT") || query.startsWith("select")) {
 					// System.out.println("PDOSqlite.execute()");
+
 					r = stmt.executeQuery(query);
 				} else {
-					stmt.executeQuery(query);
+					stmt.executeUpdate(query);
 				}
 
 			} catch (SQLException e) {

@@ -14,9 +14,13 @@ public class MUsager {
 	private ArrayList<MLivre> livres = new ArrayList<MLivre>();
 
 	public MUsager(int id, String nom, String prenom, ArrayList<MLivre> livres) {
+		this(id, nom, prenom);
+		this.livres = livres;
+	}
+
+	public MUsager(int id, String nom, String prenom) {
 		this(nom, prenom);
 		this.id = id;
-		this.livres = livres;
 	}
 
 	public MUsager(String nom, String prenom) {
@@ -65,34 +69,16 @@ public class MUsager {
 	}
 
 	public void assoc(MLivre livre) {
+		if (!livres.contains(livre)) {
+			livres.add(livre);
+		}
 
 	}
 
-	// private void fetchAssoc() {
-	//
-	// String query = "SELECT * FROM livres WHERE usager_id=" + id;
-	// ResultSet r = PDOSqlite.executeSQL(query);
-	//
-	// try {
-	// while (r.next()) {
-	// if (nom == null) {
-	// id = r.getInt("id");
-	//
-	// nom = r.getString("nom");
-	// prenom = r.getString("prenom");
-	// }
-	// // TODO : lire dates et Usager
-	//
-	// }
-	// } catch (SQLException e) {
-	// // TODO Auto-generated catch block
-	// e.printStackTrace();
-	// }
-	//
-	// }
-
 	public void dissoc(MLivre livre) {
-
+		if (livres.contains(livre)) {
+			livres.remove(livre);
+		}
 	}
 
 	public int getId() {

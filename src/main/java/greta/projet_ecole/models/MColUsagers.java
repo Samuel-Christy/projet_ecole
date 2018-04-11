@@ -26,6 +26,10 @@ public class MColUsagers {
 
 	}
 
+	public int getUsager(MUsager usager) {
+		return usagers.lastIndexOf(usager);
+	}
+
 	public void refreshList() {
 		usagers = new ArrayList<MUsager>();
 		list();
