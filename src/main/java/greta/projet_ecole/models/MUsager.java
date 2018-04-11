@@ -1,32 +1,67 @@
 package greta.projet_ecole.models;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+
+import greta.projet_ecole.pdo.PDOSqlite;
 
 public class MUsager {
 
-	private int id;
+	private int id = -1;
 	private String nom;
 	private String prenom;
 	private ArrayList<MLivre> livres = new ArrayList<MLivre>();
 
 	public MUsager(int id, String nom, String prenom, ArrayList<MLivre> livres) {
-		super();
+		this(nom, prenom);
 		this.id = id;
+		this.livres = livres;
+	}
+
+	public MUsager(String nom, String prenom) {
 		this.nom = nom;
 		this.prenom = prenom;
-		this.livres = livres;
 	}
 
 	public MUsager() {
 		super();
 	}
 
-	public void load() {
+	public void load(int id) {
+
+		String query = "SELECT * FROM usagers WHERE id=" + id;
+		ResultSet r = PDOSqlite.executeSQL(query);
+
+		try {
+			while (r.next()) {
+				if (nom == null) {
+					this.id = r.getInt("id");
+
+					nom = r.getString("nom");
+					prenom = r.getString("prenom");
+				}
+				// TODO : lire dates et Usager
+
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 
 	public void save() {
-
+		if (nom != null && prenom != null) {
+			String query = "INSERT INTO usagers (nom,prenom) VALUES (";
+			query += "\"" + nom + "\",";
+			query += "\"" + prenom + "\"";
+			query += ")";
+			// System.out.println(query);
+			PDOSqlite.executeSQL(query);
+		} else {
+			System.err.println(this + " : valeurs incorrectes");
+		}
 	}
 
 	public void assoc(MLivre livre) {
