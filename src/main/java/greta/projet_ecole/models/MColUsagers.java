@@ -26,6 +26,11 @@ public class MColUsagers {
 
 	}
 
+	public void refreshList() {
+		usagers = new ArrayList<MUsager>();
+		list();
+	}
+
 	public ArrayList<MUsager> getUsagers() {
 		return usagers;
 	}
