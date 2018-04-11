@@ -9,6 +9,6 @@ import greta.projet_ecole.views.VLivre;
 public class App {
 	public static void main(String[] args) {
 		// launch the window :
-		VLivre.main();
+		VLivre.main(args);
 	}
 }
