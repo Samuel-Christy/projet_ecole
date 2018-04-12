@@ -4,7 +4,10 @@ import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -18,10 +21,11 @@ public class VLivres {
 
 	private JFrame frame;
 
-	String donnees[] = { "titre|annee|editeur|prenomauteur|nomauteur", "titre|annee|editeur|prenomauteur|nomauteur", "titre|annee|editeur|prenomauteur|nomauteur",
-			"titre|annee|editeur|prenomauteur|nomauteur", "titre|annee|editeur|prenomauteur|nomauteur", "titre|annee|editeur|prenomauteur|nomauteur", "titre|annee|editeur|prenomauteur|nomauteur",
-			"titre|annee|editeur|prenomauteur|nomauteur", "titre|annee|editeur|prenomauteur|nomauteur", "titre|annee|editeur|prenomauteur|nomauteur" };
-	JList list = new JList(donnees);
+	int index = 0;
+	int size_list = 0;
+	Boolean item;
+	DefaultListModel dlm = new DefaultListModel();
+	JList list = new JList(dlm);
 
 	JPanel panel = new JPanel();
 	JButton addbutton = new JButton("+");
@@ -74,10 +78,36 @@ public class VLivres {
 		panel.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
 		// cache le panel
 		panel.setVisible(false);
-		list.setBorder(new LineBorder(new Color(0, 0, 0)));
 
+		list.setBorder(new LineBorder(new Color(0, 0, 0)));
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		list.setBounds(23, 21, 610, 74);
+		list.setVisibleRowCount(-1);
+
+		dlm.addElement("titre|annee|editeur|prenomauteur|nomauteur");
+		dlm.addElement("titre|annee|editeur|prenomauteur|nomauteur");
+		dlm.addElement("titre|annee|editeur|prenomauteur|nomauteur");
+		dlm.addElement("titre|annee|editeur|prenomauteur|nomauteur");
+		dlm.addElement("titre|annee|editeur|prenomauteur|nomauteur");
+		dlm.addElement("titre|annee|editeur|prenomauteur|nomauteur");
+
+		// EVENEMENT click sur un element de la liste
+		list.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				item = list.isSelectedIndex(index);
+
+				if (item == false) {
+					System.out.println(size_list = dlm.getSize());
+					System.out.println(list.getSelectedValue());
+
+					index = list.getSelectedIndex();
+
+					list.ensureIndexIsVisible(index);
+					System.out.println(index);
+				}
+			}
+		});
 
 		frame.getContentPane().add(list);
 		// ScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
@@ -88,6 +118,13 @@ public class VLivres {
 		addbutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				panel.setVisible(true);
+			}
+		});
+		delbutton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+
+				dlm.remove(index);
+				System.out.println(size_list = dlm.getSize());
 			}
 		});
 
@@ -138,6 +175,17 @@ public class VLivres {
 		textFieldNAuteur.setBounds(274, 39, 86, 20);
 		panel.add(textFieldNAuteur);
 		textFieldNAuteur.setColumns(10);
+		btnAjouter.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (textFieldAnnee.getText().isEmpty() || textTitle.getText().isEmpty() || textFieldEditeur.getText().isEmpty() || textFieldPAuteur.getText().isEmpty()
+						|| textFieldNAuteur.getText().isEmpty()) {
+					System.out.println("Un des champs est vide");
+				} else {
+					dlm.addElement("elements ajouter");
+				}
+
+			}
+		});
 		btnAjouter.setBounds(403, 82, 89, 23);
 
 		panel.add(btnAjouter);

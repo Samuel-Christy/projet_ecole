@@ -1,0 +1,12 @@
+window_sizes 1575 883 393 1177 733 104
+
+diagrams
+  active  classdiagram_ref 128025 // models
+    941 586 100 A4 0 0
+end
+show_stereotypes
+selected classdiagram_ref 128025 // models
+open
+  classview_ref 128025 // models
+end
+end

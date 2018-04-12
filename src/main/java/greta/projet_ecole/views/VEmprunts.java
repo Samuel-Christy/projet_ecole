@@ -14,8 +14,8 @@ public class VEmprunts {
 	private JFrame frame;
 	private JTextField textField;
 	private JTextField textField_1;
-	JList list = new JList();
-	JList list_1 = new JList();
+	JList listLivresEmpruntables = new JList();
+	JList listLivresempruntes = new JList();
 	JLabel lblLivresEmpruntables = new JLabel("Livres empruntables :");
 	JLabel lblLivresEmprunts = new JLabel("Livres empruntés :");
 	JLabel lblEmprunteurs = new JLabel("Emprunteurs :");
@@ -56,11 +56,11 @@ public class VEmprunts {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 
-		list.setBounds(32, 41, 371, 153);
-		frame.getContentPane().add(list);
+		listLivresEmpruntables.setBounds(32, 41, 371, 153);
+		frame.getContentPane().add(listLivresEmpruntables);
 
-		list_1.setBounds(430, 41, 371, 153);
-		frame.getContentPane().add(list_1);
+		listLivresempruntes.setBounds(430, 41, 371, 153);
+		frame.getContentPane().add(listLivresempruntes);
 
 		lblLivresEmpruntables.setBounds(22, 16, 114, 14);
 		frame.getContentPane().add(lblLivresEmpruntables);
