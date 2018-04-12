@@ -17,15 +17,16 @@ public class MLivre {
 	private Date date_sortie;
 	private Date date_retour;
 
-	public MLivre(int id, String nom_auteur, String prenom_auteur, String titre, int annee, String editeur,
-			MUsager emprunteur, Date date_sortie, Date date_retour) {
-		this(nom_auteur, prenom_auteur, titre, annee, editeur);
-		this.id = id;
-		this.emprunteur = emprunteur;
-		this.date_sortie = date_sortie;
-		this.date_retour = date_retour;
-
-	}
+	// public MLivre(int id, String nom_auteur, String prenom_auteur, String titre,
+	// int annee, String editeur,
+	// MUsager emprunteur, Date date_sortie, Date date_retour) {
+	// this(nom_auteur, prenom_auteur, titre, annee, editeur);
+	// this.id = id;
+	// this.emprunteur = emprunteur;
+	// this.date_sortie = date_sortie;
+	// this.date_retour = date_retour;
+	//
+	// }
 
 	public MLivre(String nom_auteur, String prenom_auteur, String titre, int annee, String editeur) {
 

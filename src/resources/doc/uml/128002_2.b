@@ -1,19 +1,5 @@
-package greta.projet_ecole;
-
-import java.util.Date;
-
-import greta.projet_ecole.models.MColBibliotheque;
-import greta.projet_ecole.models.MLivre;
-import greta.projet_ecole.models.MUsager;
-import greta.projet_ecole.pdo.PDOSqlite;
-import greta.projet_ecole.views.VLivres;
-
-/**
- * @author Sam
- * @description runs the app and runs some tests on the models...
- */
-public class App {
-	public static void main(String[] args) {
+class App
+!!!128002.java!!!	main(inout args : String [[]]) : void
 
 		createTables();
 		// It works better with datas, you should uncoment this one the first time you
@@ -48,14 +34,7 @@ public class App {
 
 		// launch the app's main form, we'll run until closed
 		VLivres.main(args);
-	}
-
-	/**
-	 * adds some dummy data to the DB, may not be used on every run, so it's
-	 * annotated.
-	 */
-	@SuppressWarnings("unused")
-	private static void seedDatabase() {
+!!!128130.java!!!	seedDatabase() : void
 		for (int i = 0; i < 100; i++) {
 			MLivre l = new MLivre("NomAuteur" + i, "PrenomAuteur" + i, "TitreLivre" + i, 1900 + i,
 					i % 3 == 0 ? "editeur1" : "editeur2");
@@ -66,16 +45,8 @@ public class App {
 			MUsager u = new MUsager("Nom" + i, "Prenom" + i);
 			u.save();
 		}
-	}
-
-	/**
-	 * Creates the DB file and the schema (only if the tables do not exist)
-	 */
-	private static void createTables() {
+!!!128258.java!!!	createTables() : void
 		PDOSqlite.executeSQL(
 				"CREATE TABLE IF NOT EXISTS usagers(	id      INTEGER PRIMARY KEY autoincrement NOT NULL ,	nom     TEXT NOT NULL,	prenom  TEXT NOT NULL);");
 		PDOSqlite.executeSQL(
 				"CREATE TABLE IF NOT EXISTS livres(	id             INTEGER PRIMARY KEY autoincrement NOT NULL ,	annee          INTEGER NOT NULL ,	prenom_auteur  TEXT NOT NULL ,	nom_auteur     TEXT NOT NULL ,	titre          TEXT NOT NULL ,	editeur        TEXT NOT NULL ,	date_sortie    NUMERIC  ,	date_retour    NUMERIC  ,	id_usagers     INTEGER) ;");
-	}
-
-}

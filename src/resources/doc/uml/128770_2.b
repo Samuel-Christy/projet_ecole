@@ -1,16 +1,5 @@
-package greta.projet_ecole.models;
-
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-
-import greta.projet_ecole.pdo.PDOSqlite;
-
-public class MColLivres {
-
-	ArrayList<MLivre> livres = new ArrayList<MLivre>();
-
-	public void list() {
+class MColLivres
+!!!131714.java!!!	list() : void
 
 		String query = "SELECT id FROM livres";
 		ResultSet r = PDOSqlite.executeSQL(query);
@@ -26,19 +15,10 @@ public class MColLivres {
 			e.printStackTrace();
 		}
 
-	}
-
-	public void refreshList() {
+!!!131842.java!!!	refreshList() : void
 		livres = new ArrayList<MLivre>();
 		list();
-	}
-
-	public ArrayList<MLivre> getLivres() {
+!!!131970.java!!!	getLivres() : MLivre
 		return livres;
-	}
-
-	public void setLivres(ArrayList<MLivre> livres) {
+!!!132098.java!!!	setLivres(inout livres : ArrayList<MLivre>) : void
 		this.livres = livres;
-	}
-
-}

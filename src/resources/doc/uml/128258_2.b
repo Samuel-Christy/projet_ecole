@@ -1,38 +1,16 @@
-package greta.projet_ecole.models;
-
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-
-import greta.projet_ecole.pdo.PDOSqlite;
-
-public class MUsager {
-
-	private int id = -1;
-	private String nom;
-	private String prenom;
-	private ArrayList<MLivre> livres = new ArrayList<MLivre>();
-
-	// public MUsager(int id, String nom, String prenom, ArrayList<MLivre> livres) {
-	// this(id, nom, prenom);
-	// this.livres = livres;
-	// }
-
-	public MUsager(int id, String nom, String prenom) {
+class MUsager
+!!!136450.java!!!	MUsager(in id : int, in nom : String, in prenom : String, inout livres : ArrayList<MLivre>)
+		this(id, nom, prenom);
+		this.livres = livres;
+!!!136578.java!!!	MUsager(in id : int, in nom : String, in prenom : String)
 		this(nom, prenom);
 		this.id = id;
-	}
-
-	public MUsager(String nom, String prenom) {
+!!!136706.java!!!	MUsager(in nom : String, in prenom : String)
 		this.nom = nom;
 		this.prenom = prenom;
-	}
-
-	public MUsager() {
+!!!136834.java!!!	MUsager()
 		super();
-	}
-
-	public void load(int id) {
+!!!136962.java!!!	load(in id : int) : void
 
 		String query = "SELECT * FROM usagers WHERE id=" + id;
 		ResultSet r = PDOSqlite.executeSQL(query);
@@ -53,9 +31,7 @@ public class MUsager {
 			e.printStackTrace();
 		}
 
-	}
-
-	public void save() {
+!!!137090.java!!!	save() : void
 		if (nom != null && prenom != null) {
 			String query = "INSERT INTO usagers (nom,prenom) VALUES (";
 			query += "\"" + nom + "\",";
@@ -66,51 +42,28 @@ public class MUsager {
 		} else {
 			System.err.println(this + " : valeurs incorrectes");
 		}
-	}
-
-	public void assoc(MLivre livre) {
+!!!137218.java!!!	assoc(inout livre : MLivre) : void
 		if (!livres.contains(livre)) {
 			livres.add(livre);
 		}
 
-	}
-
-	public void dissoc(MLivre livre) {
+!!!137346.java!!!	dissoc(inout livre : MLivre) : void
 		if (livres.contains(livre)) {
 			livres.remove(livre);
 		}
-	}
-
-	public int getId() {
+!!!137474.java!!!	getId() : int
 		return id;
-	}
-
-	public void setId(int id) {
+!!!137602.java!!!	setId(in id : int) : void
 		this.id = id;
-	}
-
-	public String getNom() {
+!!!137730.java!!!	getNom() : String
 		return nom;
-	}
-
-	public void setNom(String nom) {
+!!!137858.java!!!	setNom(in nom : String) : void
 		this.nom = nom;
-	}
-
-	public String getPrenom() {
+!!!137986.java!!!	getPrenom() : String
 		return prenom;
-	}
-
-	public void setPrenom(String prenom) {
+!!!138114.java!!!	setPrenom(in prenom : String) : void
 		this.prenom = prenom;
-	}
-
-	public ArrayList<MLivre> getLivres() {
+!!!138242.java!!!	getLivres() : MLivre
 		return livres;
-	}
-
-	public void setLivres(ArrayList<MLivre> livres) {
+!!!138370.java!!!	setLivres(inout livres : ArrayList<MLivre>) : void
 		this.livres = livres;
-	}
-
-}

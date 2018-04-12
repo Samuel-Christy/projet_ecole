@@ -1,36 +1,20 @@
-package greta.projet_ecole.pdo;
-
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-
-public class PDOSqlite {
-
-	private static String URL = "jdbc:sqlite:database.sqlite";
-
-	private static Connection con;
-	private static Statement stmt;
-	private static ResultSet r;
-
-	private static Connection connect() {
+class PDOSqlite
+!!!138498.java!!!	connect() : Connection
 		if (con == null) {
 			try {
 
 				con = DriverManager.getConnection(URL);
-
+				// System.out.println(con);
 				return con;
 			} catch (Exception e) {
-
+				// NB : comment this when in production, else it'll throw
+				// exceptions on request not returning results (insert, etc...)
 				e.printStackTrace();
 			}
 		}
 		return con;
 
-	}
-
-	private static Statement prepare() {
+!!!138626.java!!!	prepare() : Statement
 		// System.out.println(stmt + " " + con);
 		if (stmt == null && con != null) {
 			try {
@@ -43,9 +27,7 @@ public class PDOSqlite {
 
 		return stmt;
 
-	}
-
-	private static ResultSet execute(String query) {
+!!!138754.java!!!	execute(in query : String) : ResultSet
 
 		if (stmt != null) {
 			try {
@@ -64,17 +46,12 @@ public class PDOSqlite {
 			}
 		}
 		return r;
-	}
-
-	public static ResultSet executeSQL(String query) {
+!!!138882.java!!!	executeSQL(in query : String) : ResultSet
 		connect();
 		prepare();
 		return execute(query);
 
-	}
-
-	@SuppressWarnings("unused")
-	private static void disconnect() {
+!!!139010.java!!!	disconnect() : void
 		if (stmt != null) {
 			try {
 				stmt.close(); // Le stmt.close ferme automatiquement le
@@ -83,5 +60,3 @@ public class PDOSqlite {
 				e1.printStackTrace();
 			}
 		}
-	}
-}

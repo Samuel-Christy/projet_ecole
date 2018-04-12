@@ -1,37 +1,9 @@
-package greta.projet_ecole.models;
-
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Date;
-
-import greta.projet_ecole.pdo.PDOSqlite;
-
-/**
- * @author Sam
- * @description Handles users and books, books and users... Quite ugly for now,
- *              would be much better with an ORM ! TODO : Handle the dates
- *              better!
- *
- */
-public class MColBibliotheque {
-
-	private ArrayList<MLivre> livres = new ArrayList<MLivre>();
-	private ArrayList<MUsager> usagers = new ArrayList<MUsager>();
-
-	/**
-	 * constructor, builds the lists
-	 */
-	public MColBibliotheque() {
+class MColBibliotheque
+!!!129538.java!!!	MColBibliotheque()
 		listLivres();
 		listUsagers();
 		assocPrets();
-	}
-
-	/**
-	 * builds User's list
-	 */
-	private void listUsagers() {
+!!!129666.java!!!	listUsagers() : void
 		String query = "SELECT * FROM usagers";
 		ResultSet r = PDOSqlite.executeSQL(query);
 
@@ -46,12 +18,7 @@ public class MColBibliotheque {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
-
-	/**
-	 * Builds books list
-	 */
-	private void listLivres() {
+!!!129794.java!!!	listLivres() : void
 		String query = "SELECT * FROM livres ORDER BY date_sortie DESC";
 		ResultSet r = PDOSqlite.executeSQL(query);
 
@@ -67,12 +34,7 @@ public class MColBibliotheque {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
-
-	/**
-	 * Assoc books to users after a fresh loading
-	 */
-	private void assocPrets() {
+!!!129922.java!!!	assocPrets() : void
 
 		for (MLivre l : livres) {
 			String query = "SELECT id_usagers FROM livres where id=" + l.getId();
@@ -93,41 +55,18 @@ public class MColBibliotheque {
 
 		} // for
 
-	}
-
-	/**
-	 * @param livre
-	 * @param usager
-	 * @param date_sortie
-	 * @param date_retour
-	 *
-	 *            associates a user to a book, beware, this is not saved until the
-	 *            lists are
-	 */
-	public void assoc(MLivre livre, MUsager usager, Date date_sortie, Date date_retour) {
+!!!130050.java!!!	assoc(inout livre : MLivre, inout usager : MUsager, inout date_sortie : Date, inout date_retour : Date) : void
 		livre.setEmprunteur(usager);
 		livre.setDate_sortie(date_sortie);
 		livre.setDate_retour(date_retour);
-	}
-
-	/**
-	 * @param livre
-	 *            the exact opposite of assoc() :) [still does not save]
-	 */
-	public void dissoc(MLivre livre) {
+!!!130178.java!!!	dissoc(inout livre : MLivre) : void
 		if (livre.getEmprunteur() != null) {
 			livre.getEmprunteur().dissoc(livre);
 		}
 		livre.setEmprunteur(null);
 		livre.setDate_retour(null);
 		livre.setDate_sortie(null);
-	}
-
-	/**
-	 * Saves the list to DB, refreshes the local lists after doing so, definitively
-	 * the one to be called sometimes
-	 */
-	public void saveLivres() {
+!!!130306.java!!!	saveLivres() : void
 		for (MLivre l : livres) {
 			String query = "";
 
@@ -177,33 +116,16 @@ public class MColBibliotheque {
 		// refresh the list
 
 		reinitLists();
-	}
-
-	/**
-	 * clears the lists and reloads them from database, beware, any unsaved change
-	 * will be lost.
-	 */
-	private void reinitLists() {
+!!!130434.java!!!	reinitLists() : void
 		livres.clear();
 		usagers.clear();
 
 		initLists();
-	}
-
-	/**
-	 * loads from DB
-	 */
-	private void initLists() {
+!!!130562.java!!!	initLists() : void
 		listLivres();
 		listUsagers();
 		assocPrets();
-	}
-
-	/**
-	 * @param livre
-	 * @return it does what it says... except if a user is bound to the book
-	 */
-	public boolean delLivre(MLivre livre) {
+!!!130690.java!!!	delLivre(inout livre : MLivre) : boolean
 		if (livre.getEmprunteur() == null) {
 			String query = "DELETE FROM livres where id=" + livre.getId();
 			try {
@@ -218,55 +140,22 @@ public class MColBibliotheque {
 
 		}
 		return false;
-	}
-
-	/**
-	 * @param livre
-	 *            this one is not kidding
-	 */
-	public void forceDelLivre(MLivre livre) {
+!!!130818.java!!!	forceDelLivre(inout livre : MLivre) : void
 		dissoc(livre);
 		delLivre(livre);
-	}
-
-	/**
-	 * @param id
-	 * @return returns an user by id... or null if none found.
-	 */
-	private MUsager findUsager(int id) {
+!!!130946.java!!!	findUsager(in id : int) : MUsager
 		for (MUsager u : usagers) {
 			if (u.getId() == id)
 				return u;
 		}
 		return null;
-	}
-
-	/**
-	 * @param s
-	 * @return DRY : just bored with these double quotes...
-	 */
-	private String quoteString(String s) {
+!!!131074.java!!!	quoteString(in s : String) : String
 		return "\"" + s + "\"";
-	}
-
-	//////////////////////////////////////////////////////////////////////////
-	// accessors, what else ?
-	//////////////////////////////////////////////////////////////////////////
-
-	public ArrayList<MLivre> getLivres() {
+!!!131202.java!!!	getLivres() : MLivre
 		return livres;
-	}
-
-	public void setLivres(ArrayList<MLivre> livres) {
+!!!131330.java!!!	setLivres(inout livres : ArrayList<MLivre>) : void
 		this.livres = livres;
-	}
-
-	public ArrayList<MUsager> getUsagers() {
+!!!131458.java!!!	getUsagers() : MUsager
 		return usagers;
-	}
-
-	public void setUsagers(ArrayList<MUsager> usagers) {
+!!!131586.java!!!	setUsagers(inout usagers : ArrayList<MUsager>) : void
 		this.usagers = usagers;
-	}
-
-}
