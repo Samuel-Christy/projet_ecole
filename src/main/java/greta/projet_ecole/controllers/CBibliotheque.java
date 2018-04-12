@@ -90,10 +90,16 @@ public class CBibliotheque {
 				while (r.next()) {
 					MUsager u = findUsager(r.getInt("id_usagers"));
 					l.setEmprunteur(u);
+
+					// assocs an object to the other,
+					// sends the book to the list where it belongs
 					if (u != null) {
 						u.assoc(l);
 						livres_en_cours.add(l);
+					} else {
+						livres_dispos.add(l);
 					}
+
 				} // while
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -161,7 +167,7 @@ public class CBibliotheque {
 							: "NULL" + ",";
 					query += l.getDate_retour() != null ? "\"" + formatDateToStr(l.getDate_retour()) + "\"" : "NULL";
 					query += ")";
-					System.out.println(query);
+					// System.out.println(query);
 				} else {
 					query = "UPDATE livres SET ";
 					query += "annee = " + l.getAnnee() + ", ";
@@ -216,6 +222,14 @@ public class CBibliotheque {
 		usagers.clear();
 
 		initLists();
+	}
+
+	/**
+	 * Saves the lists and reloads them so we are on clean bases
+	 */
+	public void saveAnbRefresh() {
+		saveLivres();
+		reinitLists();
 	}
 
 	/**
@@ -320,6 +334,22 @@ public class CBibliotheque {
 
 	public void setUsagers(ArrayList<MUsager> usagers) {
 		this.usagers = usagers;
+	}
+
+	public ArrayList<MLivre> getLivres_en_cours() {
+		return livres_en_cours;
+	}
+
+	public void setLivres_en_cours(ArrayList<MLivre> livres_en_cours) {
+		this.livres_en_cours = livres_en_cours;
+	}
+
+	public ArrayList<MLivre> getLivres_dispos() {
+		return livres_dispos;
+	}
+
+	public void setLivres_dispos(ArrayList<MLivre> livres_dispos) {
+		this.livres_dispos = livres_dispos;
 	}
 
 }

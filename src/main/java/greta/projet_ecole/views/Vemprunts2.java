@@ -147,21 +147,21 @@ public class Vemprunts2 {
 
 	private void listAvailableBooks() {
 
-		ArrayList<MLivre> livres = controller.getLivres();
+		ArrayList<MLivre> livres = controller.getLivres_dispos();
 		listAvailable.removeAll();
 		for (MLivre mLivre : livres) {
 			if (mLivre.getEmprunteur() == null) {
-				listAvailable.add(livres.toString());
+				listAvailable.add(mLivre.toString());
 			}
 		}
 	}
 
 	private void listUnavailableBooks() {
-		ArrayList<MLivre> livres = controller.getLivres();
+		ArrayList<MLivre> livres = controller.getLivres_en_cours();
 		listNotAvailable.removeAll();
 		for (MLivre mLivre : livres) {
 			if (mLivre.getEmprunteur() != null) {
-				listNotAvailable.add(livres.toString());
+				listNotAvailable.add(mLivre.toString());
 			}
 		}
 	}

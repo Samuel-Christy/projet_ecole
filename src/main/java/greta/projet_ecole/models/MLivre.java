@@ -88,7 +88,7 @@ public class MLivre {
 		query += "\"" + prenom_auteur + "\",";
 		query += "\"" + titre + "\"";
 		query += ")";
-		System.out.println(query);
+		// System.out.println(query);
 		PDOSqlite.executeSQL(query);
 
 	}

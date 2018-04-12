@@ -18,12 +18,6 @@ public class MUsager {
 	private String prenom;
 	private ArrayList<MLivre> livres = new ArrayList<MLivre>();
 
-	// public MUsager(int id, String nom, String prenom, ArrayList<MLivre>
-	// livres) {
-	// this(id, nom, prenom);
-	// this.livres = livres;
-	// }
-
 	public MUsager(int id, String nom, String prenom) {
 		this(nom, prenom);
 		this.id = id;
