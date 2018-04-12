@@ -58,7 +58,7 @@ public class VLivres2 {
 	private Button btnCancel = new Button("Annuler");
 
 	private ArrayList<MLivre> livres;
-	private final JLabel lblError = new JLabel("");
+	private final JLabel lblError = new JLabel("...");
 
 	/**
 	 * Launch the application.
