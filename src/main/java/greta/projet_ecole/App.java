@@ -29,24 +29,29 @@ public class App {
 		///////////////////////////////////////////////
 
 		// try an assoc :
+		// bibli.assoc(bibli.getLivres().get(1), bibli.getUsagers().get(1), new
+		// Date(), new Date());
+		// System.out.println(bibli.getLivres().get(1).getDate_retour());
+		//
+		// // append a new book
+		// MLivre l = new MLivre("moi", "encore moi", "le moi et le sur-moi",
+		// 2018, "Ego :)");
+		// bibli.getLivres().add(l);
+		//
+		// // save it
+		// bibli.saveLivres();
+		// System.out.println(bibli.getLivres().get(1).getDate_retour());
+		//
+		// // dissoc
+		// l = bibli.findLivre(2);
+		// System.out.println(l.getId());
+		// System.out.println(l.getEmprunteur());
+		// // bibli.dissoc(l);
+		// System.out.println(l.getEmprunteur());
+		// bibli.saveLivres();
+
 		bibli.assoc(bibli.getLivres().get(1), bibli.getUsagers().get(1), new Date(), new Date());
-		System.out.println(bibli.getLivres().get(1).getEmprunteur().getNom());
-
-		// append a new book
-		MLivre l = new MLivre("moi", "encore moi", "le moi et le sur-moi", 2018, "Ego :)");
-		bibli.getLivres().add(l);
-
-		// save it
 		bibli.saveLivres();
-
-		// dissoc
-		l = bibli.findLivre(2);
-		System.out.println(l.getId());
-		System.out.println(l.getEmprunteur());
-		bibli.dissoc(l);
-		System.out.println(l.getEmprunteur());
-		bibli.saveLivres();
-
 		///////////////////////////////////////////////
 		// end of testing code
 		//////////////////////////////////////////////
@@ -63,6 +68,19 @@ public class App {
 	 */
 	@SuppressWarnings("unused")
 	private static void seedDatabase() {
+		System.out.println("------------------------------------------------------");
+		System.out.println("Drop and recreate tables");
+		System.out.println("------------------------------------------------------");
+
+		PDOSqlite.executeSQL("DROP TABLE IF EXISTS livres");
+		PDOSqlite.executeSQL("DROP TABLE IF EXISTS usagers");
+
+		createTables();
+
+		System.out.println("------------------------------------------------------");
+		System.out.println("Seeding tables");
+		System.out.println("------------------------------------------------------");
+
 		for (int i = 0; i < 10; i++) {
 			MLivre l = new MLivre("NomAuteur" + i, "PrenomAuteur" + i, "TitreLivre" + i, 1990 + i,
 					i % 3 == 0 ? "editeur1" : "editeur2");
@@ -73,12 +91,21 @@ public class App {
 			MUsager u = new MUsager("Nom" + i, "Prenom" + i);
 			u.save();
 		}
+
+		System.out.println("------------------------------------------------------");
+		System.out.println("Done");
+		System.out.println("------------------------------------------------------");
 	}
 
 	/**
 	 * Creates the DB file and the schema (only if the tables do not exist)
 	 */
 	private static void createTables() {
+
+		System.out.println("------------------------------------------------------");
+		System.out.println("Create brand new tables (if not present)");
+		System.out.println("------------------------------------------------------");
+
 		PDOSqlite.executeSQL(
 				"CREATE TABLE IF NOT EXISTS usagers(	id      INTEGER PRIMARY KEY autoincrement NOT NULL ,	nom     TEXT NOT NULL,	prenom  TEXT NOT NULL);");
 		PDOSqlite.executeSQL(
