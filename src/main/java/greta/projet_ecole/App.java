@@ -6,7 +6,7 @@ import greta.projet_ecole.controllers.CBibliotheque;
 import greta.projet_ecole.models.MLivre;
 import greta.projet_ecole.models.MUsager;
 import greta.projet_ecole.pdo.PDOSqlite;
-import greta.projet_ecole.views.VLivres;
+import greta.projet_ecole.views.VLivres2;
 
 /**
  * @author Sam
@@ -53,7 +53,7 @@ public class App {
 
 		// launch the app's main form, we'll run until closed
 
-		VLivres.main(args);
+		VLivres2.main(args, bibli);
 	}
 
 	/**

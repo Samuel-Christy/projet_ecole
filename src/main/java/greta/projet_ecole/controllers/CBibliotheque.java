@@ -65,6 +65,7 @@ public class CBibliotheque {
 			while (r.next()) {
 				MLivre l = new MLivre(r.getInt("id"), r.getString("nom_auteur"), r.getString("prenom_auteur"),
 						r.getString("titre"), r.getInt("annee"), r.getString("editeur"));
+
 				livres.add(l);
 				// TODO : lire dates et Usager
 

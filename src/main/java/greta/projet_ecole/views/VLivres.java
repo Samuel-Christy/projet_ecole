@@ -13,6 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.LineBorder;
@@ -79,11 +80,6 @@ public class VLivres {
 		// cache le panel
 		panel.setVisible(false);
 
-		list.setBorder(new LineBorder(new Color(0, 0, 0)));
-		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		list.setBounds(23, 21, 610, 74);
-		list.setVisibleRowCount(-1);
-
 		dlm.addElement("titre|annee|editeur|prenomauteur|nomauteur");
 		dlm.addElement("titre|annee|editeur|prenomauteur|nomauteur");
 		dlm.addElement("titre|annee|editeur|prenomauteur|nomauteur");
@@ -109,7 +105,19 @@ public class VLivres {
 			}
 		});
 
+		list.setLayoutOrientation(JList.VERTICAL);
+		list.setBorder(new LineBorder(new Color(0, 0, 0)));
+		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		list.setBounds(23, 21, 610, 74);
+		list.setVisibleRowCount(-1);
+
+		JScrollPane listScroller = new JScrollPane();
+		listScroller.setViewportView(list);
+
+		frame.getContentPane().add(listScroller);
+
 		frame.getContentPane().add(list);
+
 		// ScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 		// frame.getContentPane().add(ScrollPane);
 
@@ -177,7 +185,8 @@ public class VLivres {
 		textFieldNAuteur.setColumns(10);
 		btnAjouter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (textFieldAnnee.getText().isEmpty() || textTitle.getText().isEmpty() || textFieldEditeur.getText().isEmpty() || textFieldPAuteur.getText().isEmpty()
+				if (textFieldAnnee.getText().isEmpty() || textTitle.getText().isEmpty()
+						|| textFieldEditeur.getText().isEmpty() || textFieldPAuteur.getText().isEmpty()
 						|| textFieldNAuteur.getText().isEmpty()) {
 					System.out.println("Un des champs est vide");
 				} else {
@@ -203,4 +212,5 @@ public class VLivres {
 		panel.add(btnNettoyer);
 
 	}
+
 }

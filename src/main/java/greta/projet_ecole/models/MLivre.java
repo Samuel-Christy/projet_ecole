@@ -17,7 +17,8 @@ public class MLivre {
 	private Date date_sortie;
 	private Date date_retour;
 
-	// public MLivre(int id, String nom_auteur, String prenom_auteur, String titre,
+	// public MLivre(int id, String nom_auteur, String prenom_auteur, String
+	// titre,
 	// int annee, String editeur,
 	// MUsager emprunteur, Date date_sortie, Date date_retour) {
 	// this(nom_auteur, prenom_auteur, titre, annee, editeur);
@@ -34,6 +35,7 @@ public class MLivre {
 		this.prenom_auteur = prenom_auteur;
 		this.titre = titre;
 		this.editeur = editeur;
+		this.annee = annee;
 
 	}
 
@@ -43,6 +45,7 @@ public class MLivre {
 		this.prenom_auteur = prenom_auteur;
 		this.titre = titre;
 		this.editeur = editeur;
+		this.annee = annee;
 
 	}
 
@@ -78,7 +81,7 @@ public class MLivre {
 	}
 
 	public void save() {
-		String query = "INSERT INTO livres (annee,editeur,nom_auteur,prenom_auteur,titre) VALUES (";
+		String query = "INSERT INTO livres	 (annee,editeur,nom_auteur,prenom_auteur,titre) VALUES (";
 		query += annee + ",";
 		query += "\"" + editeur + "\",";
 		query += "\"" + nom_auteur + "\",";
@@ -142,10 +145,12 @@ public class MLivre {
 	}
 
 	public int getAnnee() {
+		System.out.println("MLivre.getAnnee()" + annee);
 		return annee;
 	}
 
 	public void setAnnee(int annee) {
+		System.out.println("MLivre.setAnnee()" + annee);
 		this.annee = annee;
 	}
 
