@@ -220,18 +220,21 @@ public class VEmprunts {
 					System.out.println("Un des champs est vide");
 				} else {
 					try {
+						// récuperation du texte des deux dates pours les convertir en Date
 						Date dateRetour = sdf.parse(textFielddateDeRetour.getText());
 						System.out.println(dateRetour);
 						Date dateEmprunts = sdf.parse(textFieldDateEmprunts.getText());
 
+						// si la date n'est pas au bon format
 						if (!sdf.format(dateRetour).equals(textFielddateDeRetour.getText())) {
 							throw new ParseException(textFielddateDeRetour.getText() + " is not a valid format for " + format, 0);
-						}
-						else{
-//							if(dateRetour>dateEmprunts)
-//							{
-//
-//							}
+						} else {
+							if (dateRetour.before(dateEmprunts)) {
+								System.out.println("La date de retour doit être supérieur à la date d'emprunts");
+							} else {
+								System.out.println("Livre bien emprunter");
+							}
+							//
 						}
 					} catch (ParseException ex) {
 						ex.printStackTrace();
@@ -242,10 +245,11 @@ public class VEmprunts {
 
 				}
 
-				if(date>date2)
+				//
 
 			}
 		});
 
 	}
+
 }
