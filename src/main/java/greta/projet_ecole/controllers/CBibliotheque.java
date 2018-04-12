@@ -23,6 +23,7 @@ public class CBibliotheque {
 
 	private ArrayList<MLivre> livres = new ArrayList<MLivre>();
 	private ArrayList<MUsager> usagers = new ArrayList<MUsager>();
+	private ArrayList<MLivre> livres_en_cours = new ArrayList<MLivre>();
 
 	/**
 	 * constructor, builds the lists
@@ -89,6 +90,7 @@ public class CBibliotheque {
 					l.setEmprunteur(u);
 					if (u != null) {
 						u.assoc(l);
+						livres_en_cours.add(l);
 					}
 				} // while
 			} catch (SQLException e) {
@@ -113,6 +115,9 @@ public class CBibliotheque {
 		livre.setEmprunteur(usager);
 		livre.setDate_sortie(date_sortie);
 		livre.setDate_retour(date_retour);
+		if (!livres_en_cours.contains(livre)) {
+			livres_en_cours.add(livre);
+		}
 	}
 
 	/**
@@ -126,6 +131,9 @@ public class CBibliotheque {
 		livre.setEmprunteur(null);
 		livre.setDate_retour(null);
 		livre.setDate_sortie(null);
+		if (livres_en_cours.contains(livre)) {
+			livres_en_cours.remove(livre);
+		}
 	}
 
 	/**
