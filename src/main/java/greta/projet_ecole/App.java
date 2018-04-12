@@ -62,13 +62,13 @@ public class App {
 	 */
 	@SuppressWarnings("unused")
 	private static void seedDatabase() {
-		for (int i = 0; i < 100; i++) {
-			MLivre l = new MLivre("NomAuteur" + i, "PrenomAuteur" + i, "TitreLivre" + i, 1900 + i,
+		for (int i = 0; i < 10; i++) {
+			MLivre l = new MLivre("NomAuteur" + i, "PrenomAuteur" + i, "TitreLivre" + i, 1990 + i,
 					i % 3 == 0 ? "editeur1" : "editeur2");
 			l.save();
 		}
 
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 3; i++) {
 			MUsager u = new MUsager("Nom" + i, "Prenom" + i);
 			u.save();
 		}
