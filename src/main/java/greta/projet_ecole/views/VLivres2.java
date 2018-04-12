@@ -58,7 +58,7 @@ public class VLivres2 {
 	private Button btnCancel = new Button("Annuler");
 
 	private ArrayList<MLivre> livres;
-	private final JLabel lblError = new JLabel("...");
+	private final JLabel lblError = new JLabel("");
 
 	/**
 	 * Launch the application.
@@ -109,6 +109,7 @@ public class VLivres2 {
 			public void mouseClicked(MouseEvent e) {
 				editsfromList = false;
 				prepareNewLivre();
+				lblError.setText("");
 			}
 		});
 
@@ -205,7 +206,7 @@ public class VLivres2 {
 		edPrenomAuteur.setText("");
 		edTitre.setText("");
 		spinEdDate.setValue(2018);
-		lblError.setText(""); // reset de l'erreur
+		// lblError.setText(""); // reset de l'erreur
 
 	}
 
@@ -220,10 +221,6 @@ public class VLivres2 {
 			lblError.setText("");
 			MLivre livre = editsfromList ? controller.getLivres().get(list.getSelectedIndex()) : new MLivre();
 
-			// edNomAuteur.getText(), edPrenomAuteur.getText(),
-			// edTitre.getText(),
-			// , edEditeur.getText()
-
 			livre.setAnnee(Integer.parseInt(spinEdDate.getValue().toString()));
 			livre.setEditeur(edEditeur.getText());
 			livre.setNom_auteur(edNomAuteur.getText());
@@ -233,7 +230,7 @@ public class VLivres2 {
 			if (!controller.getLivres().contains(livre)) {
 				controller.getLivres().add(livre);
 			}
-
+			// TODO : trigger save list from controller.
 			getList();
 
 		} else {

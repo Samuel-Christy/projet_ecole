@@ -99,9 +99,14 @@ public class MLivre {
 
 	@Override
 	public String toString() {
-		return "nom_auteur=" + nom_auteur + ", prenom_auteur=" + prenom_auteur + ", titre=" + titre + ", annee=" + annee
-				+ ", editeur=" + editeur + ", emprunteur=" + emprunteur + ", date_sortie=" + date_sortie
-				+ ", date_retour=" + date_retour + "]";
+
+		String temp = emprunteur == null ? "" : "* ";
+		temp += annee + " - ";
+		temp += titre + " - ";
+		temp += " [ " + prenom_auteur + " " + nom_auteur + " ] ";
+		temp += " { " + editeur + " } ";
+
+		return temp;
 	}
 
 	public void assoc(MUsager usager) {
