@@ -30,9 +30,7 @@ public class CBibliotheque {
 	 * constructor, builds the lists
 	 */
 	public CBibliotheque() {
-		listLivres();
-		listUsagers();
-		assocPrets();
+		initLists();
 	}
 
 	/**
@@ -65,7 +63,8 @@ public class CBibliotheque {
 		try {
 			while (r.next()) {
 				MLivre l = new MLivre(r.getInt("id"), r.getString("nom_auteur"), r.getString("prenom_auteur"),
-						r.getString("titre"), r.getInt("annee"), r.getString("editeur"));
+						r.getString("titre"), r.getInt("annee"), r.getString("editeur"),
+						formatStrToDate(r.getString("date_sortie")), formatStrToDate(r.getString("date_retour")));
 
 				livres.add(l);
 				// TODO : lire dates et Usager
@@ -74,6 +73,23 @@ public class CBibliotheque {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+	}
+
+	private void dispatchToSubLists() {
+		livres_dispos.clear();
+		livres_en_cours.clear();
+
+		for (MLivre livre : livres) {
+			if (livre.getEmprunteur() == null) {
+				if (!livres_dispos.contains(livre)) {
+					livres_dispos.add(livre);
+				}
+			} else {
+				if (!livres_en_cours.contains(livre)) {
+					livres_en_cours.add(livre);
+				}
+			}
 		}
 	}
 
@@ -95,9 +111,10 @@ public class CBibliotheque {
 					// sends the book to the list where it belongs
 					if (u != null) {
 						u.assoc(l);
-						livres_en_cours.add(l);
+
+						System.out.println(l.getDate_retour());
 					} else {
-						livres_dispos.add(l);
+
 					}
 
 				} // while
@@ -187,7 +204,7 @@ public class CBibliotheque {
 						query += "date_retour = NULL";
 					}
 					query += " WHERE id=" + l.getId();
-					// System.out.println(query);
+					System.out.println(query);
 				}
 				PDOSqlite.executeSQL(query);
 			} catch (Exception e) {
@@ -239,6 +256,7 @@ public class CBibliotheque {
 		listLivres();
 		listUsagers();
 		assocPrets();
+		dispatchToSubLists();
 	}
 
 	/**
@@ -314,6 +332,23 @@ public class CBibliotheque {
 		}
 		return s;
 
+	}
+
+	private Date formatStrToDate(String s) {
+
+		if (null != s) {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			Date convertedCurrentDate;
+			try {
+				convertedCurrentDate = sdf.parse(s);
+				String date = sdf.format(convertedCurrentDate);
+				return convertedCurrentDate;
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return null;
 	}
 
 	//////////////////////////////////////////////////////////////////////////
