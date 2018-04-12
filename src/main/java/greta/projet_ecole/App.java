@@ -6,7 +6,7 @@ import greta.projet_ecole.controllers.CBibliotheque;
 import greta.projet_ecole.models.MLivre;
 import greta.projet_ecole.models.MUsager;
 import greta.projet_ecole.pdo.PDOSqlite;
-import greta.projet_ecole.views.Vemprunts2;
+import greta.projet_ecole.views.VEmprunts;
 
 /**
  * @author Sam
@@ -30,22 +30,25 @@ public class App {
 
 		// try an assoc :
 		bibli.assoc(bibli.getLivres().get(1), bibli.getUsagers().get(1), new Date(), new Date());
-		System.out.println(bibli.getLivres().get(1).getEmprunteur().getNom());
+		bibli.saveAnbRefresh();
+		// System.out.println(bibli.getLivres().get(1).getDate_retour());
+
+		// System.out.println(bibli.getLivres().get(1).getEmprunteur().getNom());
 
 		// append a new book
-		MLivre l = new MLivre("moi", "encore moi", "le moi et le sur-moi", 2018, "Ego :)");
-		bibli.getLivres().add(l);
-
-		// save it
-		bibli.saveLivres();
-
-		// dissoc
-		l = bibli.findLivre(2);
-		System.out.println(l.getId());
-		System.out.println(l.getEmprunteur());
-		bibli.dissoc(l);
-		System.out.println(l.getEmprunteur());
-		bibli.saveLivres();
+		// MLivre l = new MLivre("moi", "encore moi", "le moi et le sur-moi", 2018, "Ego :)");
+		// bibli.getLivres().add(l);
+		//
+		// // save it
+		// bibli.saveLivres();
+		//
+		// // dissoc
+		// l = bibli.findLivre(2);
+		// System.out.println(l.getId());
+		// System.out.println(l.getEmprunteur());
+		// bibli.dissoc(l);
+		// System.out.println(l.getEmprunteur());
+		// bibli.saveLivres();
 
 		///////////////////////////////////////////////
 		// end of testing code
@@ -54,7 +57,7 @@ public class App {
 		// launch the app's main form, we'll run until closed
 
 		// VLivres2.main(args, bibli);
-		Vemprunts2.main(args, bibli);
+		VEmprunts.main(args, bibli);
 	}
 
 	/**
@@ -64,8 +67,7 @@ public class App {
 	@SuppressWarnings("unused")
 	private static void seedDatabase() {
 		for (int i = 0; i < 10; i++) {
-			MLivre l = new MLivre("NomAuteur" + i, "PrenomAuteur" + i, "TitreLivre" + i, 1990 + i,
-					i % 3 == 0 ? "editeur1" : "editeur2");
+			MLivre l = new MLivre("NomAuteur" + i, "PrenomAuteur" + i, "TitreLivre" + i, 1990 + i, i % 3 == 0 ? "editeur1" : "editeur2");
 			l.save();
 		}
 
@@ -79,8 +81,7 @@ public class App {
 	 * Creates the DB file and the schema (only if the tables do not exist)
 	 */
 	private static void createTables() {
-		PDOSqlite.executeSQL(
-				"CREATE TABLE IF NOT EXISTS usagers(	id      INTEGER PRIMARY KEY autoincrement NOT NULL ,	nom     TEXT NOT NULL,	prenom  TEXT NOT NULL);");
+		PDOSqlite.executeSQL("CREATE TABLE IF NOT EXISTS usagers(	id      INTEGER PRIMARY KEY autoincrement NOT NULL ,	nom     TEXT NOT NULL,	prenom  TEXT NOT NULL);");
 		PDOSqlite.executeSQL(
 				"CREATE TABLE IF NOT EXISTS livres(	id             INTEGER PRIMARY KEY autoincrement NOT NULL ,	annee          INTEGER NOT NULL ,	prenom_auteur  TEXT NOT NULL ,	nom_auteur     TEXT NOT NULL ,	titre          TEXT NOT NULL ,	editeur        TEXT NOT NULL ,	date_sortie    NUMERIC  ,	date_retour    NUMERIC  ,	id_usagers     INTEGER) ;");
 	}

@@ -9,19 +9,27 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
+import greta.projet_ecole.controllers.CBibliotheque;
+import greta.projet_ecole.models.MLivre;
+import greta.projet_ecole.models.MUsager;
+
 public class VEmprunts {
+
+	private CBibliotheque controller;
 
 	private JFrame frame;
 
 	// Création des deux listes
-	List listLivresempruntes = new List();
+	List listLivresEmpruntesmpruntes = new List();
 	List listLivresEmpruntables = new List();
 
 	// création des composants
@@ -40,17 +48,20 @@ public class VEmprunts {
 	String format = "dd/MM/yyyy";
 	SimpleDateFormat sdf = new SimpleDateFormat(format);
 
-	int index = 0;
+	int index = 1;
+	int indexlivre = 0;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args, final CBibliotheque controller) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					VEmprunts window = new VEmprunts();
 					window.frame.setVisible(true);
+					window.setController(controller);
+					window.listAll();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -58,11 +69,48 @@ public class VEmprunts {
 		});
 	}
 
+	private void listAll() {
+		listUsagers();
+		listLivresDispo();
+		listLivresNonDispo();
+	}
+
+	private void listUsagers() {
+		choiceEmprunteurs.removeAll();
+
+		ArrayList<MUsager> usagers = controller.getUsagers();
+		choiceEmprunteurs.add("");
+		for (MUsager mUsager : usagers) {
+			choiceEmprunteurs.add(mUsager.toString());
+		}
+	}
+
+	private void listLivresDispo() {
+		listLivresEmpruntables.removeAll();
+
+		for (MLivre livre : controller.getLivres_dispos()) {
+			listLivresEmpruntables.add(livre.toString());
+		}
+
+	}
+
+	private void listLivresNonDispo() {
+		listLivresEmpruntesmpruntes.removeAll();
+
+		for (MLivre livre : controller.getLivres_en_cours()) {
+			listLivresEmpruntesmpruntes.add(livre.toString());
+		}
+	}
+
 	/**
 	 * Create the application.
 	 */
 	public VEmprunts() {
 		initialize();
+	}
+
+	public void setController(CBibliotheque controller) {
+		this.controller = controller;
 	}
 
 	/**
@@ -74,8 +122,8 @@ public class VEmprunts {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 
-		listLivresempruntes.setBounds(430, 41, 371, 153);
-		frame.getContentPane().add(listLivresempruntes);
+		listLivresEmpruntesmpruntes.setBounds(430, 41, 371, 153);
+		frame.getContentPane().add(listLivresEmpruntesmpruntes);
 
 		lblLivresEmpruntables.setBounds(32, 16, 144, 14);
 		frame.getContentPane().add(lblLivresEmpruntables);
@@ -120,37 +168,38 @@ public class VEmprunts {
 		frame.getContentPane().add(listLivresEmpruntables);
 
 		// ajouter elements au livres empruntables
-
-		listLivresEmpruntables.add("Livres empruntable 1");
-		listLivresEmpruntables.add("Livres empruntable 2");
-		listLivresEmpruntables.add("Livres empruntable 3");
-		listLivresEmpruntables.add("Livres empruntable 4");
-		listLivresEmpruntables.add("Livres empruntable 5");
-		listLivresEmpruntables.add("Livres empruntable 6");
-
-		// Ajouter elements aux livres emprunters
-		listLivresempruntes.add("Livres emprunters1");
-		listLivresempruntes.add("Livres emprunters2");
-		listLivresempruntes.add("Livres emprunters3");
-		listLivresempruntes.add("Livres emprunters4");
-
-		// Ajout de la liste des emprunteurs
-		choiceEmprunteurs.add("emprunteurs1");
-		choiceEmprunteurs.add("emprunteurs2");
-		choiceEmprunteurs.add("emprunteurs3");
-		choiceEmprunteurs.add("emprunteurs4");
+		//
+		// listLivresEmpruntables.add("Livres empruntable 1");
+		// listLivresEmpruntables.add("Livres empruntable 2");
+		// listLivresEmpruntables.add("Livres empruntable 3");
+		// listLivresEmpruntables.add("Livres empruntable 4");
+		// listLivresEmpruntables.add("Livres empruntable 5");
+		// listLivresEmpruntables.add("Livres empruntable 6");
+		//
+		// // Ajouter elements aux livres emprunters
+		// listLivresempruntes.add("Livres emprunters1");
+		// listLivresempruntes.add("Livres emprunters2");
+		// listLivresempruntes.add("Livres emprunters3");
+		// listLivresempruntes.add("Livres emprunters4");
+		//
+		// // Ajout de la liste des emprunteurs
+		// choiceEmprunteurs.add("emprunteurs1");
+		// choiceEmprunteurs.add("emprunteurs2");
+		// choiceEmprunteurs.add("emprunteurs3");
+		// choiceEmprunteurs.add("emprunteurs4");
 
 		// Lorsque que l'on clique sur un element de la liste de livre empruntables
 		listLivresEmpruntables.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				// desactivation la selection sur la liste de livres empruntes
-				listLivresempruntes.select(-1);
+				listLivresEmpruntesmpruntes.select(-1);
 
-				if (listLivresempruntes.getSelectedIndex() == -1) {
+				if (listLivresEmpruntesmpruntes.getSelectedIndex() == -1) {
 
 					// activation de la modification du choix de l'emprunteurs
 					choiceEmprunteurs.setEnabled(true);
+					listUsagers();
 					// activation de la modification due la date de début d'emprunt
 					textFieldDateEmprunts.setEnabled(true);
 
@@ -163,7 +212,7 @@ public class VEmprunts {
 		});
 
 		// Lorsque que l'on clique sur un element de la liste de livre empruntes
-		listLivresempruntes.addMouseListener(new MouseAdapter() {
+		listLivresEmpruntesmpruntes.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 
@@ -173,12 +222,16 @@ public class VEmprunts {
 
 				if (listLivresEmpruntables.getSelectedIndex() == -1) {
 
-					// recuperation de l'emprunteur lier au livre
-					choiceEmprunteurs.add("emprunteurs1");
 					// desactivation du choix de l'emprunteur
 					choiceEmprunteurs.setEnabled(false);
+
+					index = listLivresEmpruntesmpruntes.getSelectedIndex();
+
+					choiceEmprunteurs.add(controller.findUsager(index).toString());
+					// choiceEmprunteurs.add(controller.getUsagers().toString());
+
 					// recuperation de la date d'emprunts
-					textFieldDateEmprunts.setText("15/03/2018");
+					// textFieldDateEmprunts.setText("" + controller.getUsagers());
 
 					// desactivation de la date d'emprunts
 					textFieldDateEmprunts.setEnabled(false);
@@ -230,9 +283,23 @@ public class VEmprunts {
 							throw new ParseException(textFielddateDeRetour.getText() + " is not a valid format for " + format, 0);
 						} else {
 							if (dateRetour.before(dateEmprunts)) {
-								System.out.println("La date de retour doit être supérieur à la date d'emprunts");
+								JOptionPane.showMessageDialog(frame, "La date de retour doit être postérieur à la date demprunts", "Inane error", JOptionPane.ERROR_MESSAGE);
 							} else {
-								System.out.println("Livre bien emprunter");
+
+								int usagerselect = choiceEmprunteurs.getSelectedIndex();
+
+								int livreselect = listLivresEmpruntables.getSelectedIndex();
+								if (usagerselect != 0) {
+									controller.assoc(controller.getLivres_dispos().get(livreselect), controller.getUsagers().get(usagerselect), dateEmprunts, dateRetour);
+									// controller.findUsager(index), dateEmprunts, dateRetour);
+									// controller.saveAnbRefresh();
+									JOptionPane.showMessageDialog(frame, "Livre bien emprunter");
+									controller.saveAnbRefresh();
+									listLivresNonDispo();
+
+								} else {
+									JOptionPane.showMessageDialog(frame, "Veuillez selectionnez un utilisateur", "Inane error", JOptionPane.ERROR_MESSAGE);
+								}
 							}
 							//
 						}
