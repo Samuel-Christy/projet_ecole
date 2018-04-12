@@ -24,6 +24,7 @@ public class CBibliotheque {
 	private ArrayList<MLivre> livres = new ArrayList<MLivre>();
 	private ArrayList<MUsager> usagers = new ArrayList<MUsager>();
 	private ArrayList<MLivre> livres_en_cours = new ArrayList<MLivre>();
+	private ArrayList<MLivre> livres_dispos = new ArrayList<MLivre>();
 
 	/**
 	 * constructor, builds the lists

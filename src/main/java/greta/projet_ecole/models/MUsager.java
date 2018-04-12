@@ -8,12 +8,18 @@ import greta.projet_ecole.pdo.PDOSqlite;
 
 public class MUsager {
 
+	@Override
+	public String toString() {
+		return nom + " " + prenom;
+	}
+
 	private int id = -1;
 	private String nom;
 	private String prenom;
 	private ArrayList<MLivre> livres = new ArrayList<MLivre>();
 
-	// public MUsager(int id, String nom, String prenom, ArrayList<MLivre> livres) {
+	// public MUsager(int id, String nom, String prenom, ArrayList<MLivre>
+	// livres) {
 	// this(id, nom, prenom);
 	// this.livres = livres;
 	// }
