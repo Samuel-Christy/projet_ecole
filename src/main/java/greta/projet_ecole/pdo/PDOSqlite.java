@@ -6,6 +6,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+/**
+ * @author Sam Meant to establish one and only one connection and execute raw
+ *         queries
+ *
+ */
 public class PDOSqlite {
 
 	private static String URL = "jdbc:sqlite:database.sqlite";
@@ -45,6 +50,10 @@ public class PDOSqlite {
 
 	}
 
+	/**
+	 * @param query
+	 * @return Resultset if request is a select, else null
+	 */
 	private static ResultSet execute(String query) {
 
 		if (stmt != null) {
@@ -66,6 +75,11 @@ public class PDOSqlite {
 		return r;
 	}
 
+	/**
+	 * @param query
+	 * @return this is the one to be called from outside this class, executes a
+	 *         raw SQL query and returns a ResultSet (or null)
+	 */
 	public static ResultSet executeSQL(String query) {
 		connect();
 		prepare();
@@ -73,6 +87,9 @@ public class PDOSqlite {
 
 	}
 
+	/**
+	 * not effectively used, as connection is closed when app stops...
+	 */
 	@SuppressWarnings("unused")
 	private static void disconnect() {
 		if (stmt != null) {

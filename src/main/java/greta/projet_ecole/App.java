@@ -2,7 +2,7 @@ package greta.projet_ecole;
 
 import java.util.Date;
 
-import greta.projet_ecole.models.MColBibliotheque;
+import greta.projet_ecole.controllers.CBibliotheque;
 import greta.projet_ecole.models.MLivre;
 import greta.projet_ecole.models.MUsager;
 import greta.projet_ecole.pdo.PDOSqlite;
@@ -16,12 +16,13 @@ public class App {
 	public static void main(String[] args) {
 
 		createTables();
-		// It works better with datas, you should uncoment this one the first time you
+		// It works better with datas, you should uncoment this one the first
+		// time you
 		// run me (and comment it back after)
 		// seedDatabase();
 
 		// create the Collection
-		MColBibliotheque bibli = new MColBibliotheque();
+		CBibliotheque bibli = new CBibliotheque();
 
 		////////////////////////////////////////////////
 		// code below is for testing
@@ -39,14 +40,19 @@ public class App {
 		bibli.saveLivres();
 
 		// dissoc
-		// bibli.dissoc(bibli.getLivres().get(1));
-		// bibli.saveLivres();
+		l = bibli.findLivre(2);
+		System.out.println(l.getId());
+		System.out.println(l.getEmprunteur());
+		bibli.dissoc(l);
+		System.out.println(l.getEmprunteur());
+		bibli.saveLivres();
 
 		///////////////////////////////////////////////
 		// end of testing code
 		//////////////////////////////////////////////
 
 		// launch the app's main form, we'll run until closed
+
 		VLivres.main(args);
 	}
 

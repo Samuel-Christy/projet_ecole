@@ -30,11 +30,11 @@
 
  <build>
     <plugins>
+      
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jar-plugin</artifactId>
         <version>2.1</version>
-
         <configuration>
           <archive>
             <manifest>
@@ -50,7 +50,36 @@
             </manifestEntries>
           </archive>
         </configuration>
-
+      </plugin>
+      
+      <plugin>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <descriptorRefs>
+            <descriptorRef>jar-with-dependencies</descriptorRef>
+          </descriptorRefs>
+          <archive>
+            <manifest>
+              <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+              <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+              <addClasspath>true</addClasspath>
+            </manifest>
+            <manifestEntries>
+              <Main-Class>greta/projet_ecole/App</Main-Class>
+<!--               <Class-Path>greta/projet_ecole/</Class-Path> -->
+              <url>${project.url}</url>
+              <key>value</key>
+            </manifestEntries>
+          </archive>
+        </configuration>
       </plugin>
     </plugins>
   </build>
